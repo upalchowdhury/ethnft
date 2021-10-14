@@ -6,6 +6,8 @@ OPENSEA_URL = "https://testnets.opensea.io/assets/{}/{}"
 BREED_MAPPING = {0: "187", 1: "193", 2: "198"}
 
 
+
+
 def get_breed(breed_number):
     return BREED_MAPPING[breed_number]
 
