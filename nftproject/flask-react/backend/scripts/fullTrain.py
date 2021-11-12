@@ -1,6 +1,4 @@
-"""
-Name: Syed
-"""
+
 
 import tensorflow as tf
 from tensorflow.keras.layers import Input, Reshape, Dropout, Dense 
@@ -175,7 +173,7 @@ def save_images(cnt,noise):
         image_count += 1
 
           
-  output_path = os.path.join(DATA_PATH,'output')
+  output_path = os.path.join(DATA_PATH,'outputdata')
   if not os.path.exists(output_path):
     os.makedirs(output_path)
   
@@ -262,6 +260,13 @@ def train(dataset, epochs):
 
   elapsed = time.time()-start
   print (f'Training time: {hms_string(elapsed)}')
+
+  # if __name__== "__main__":
+  #   DATA_PATH = "./images/"
+  #   train_dataset = getdata(DATA_PATH)
+  #   train(train_dataset,3)
+
+
 
 
 

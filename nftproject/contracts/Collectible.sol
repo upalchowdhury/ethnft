@@ -4,15 +4,25 @@ pragma solidity 0.6.6;
 import "@openzeppelin/contracts/token/ERC721/ERC721.sol";
 import "@chainlink/contracts/src/v0.6/VRFConsumerBase.sol";
 
-contract AdvancedCollectible is ERC721, VRFConsumerBase {
+contract Collectible is ERC721, VRFConsumerBase {
     uint256 public tokenCounter;
     bytes32 public keyhash;
     uint256 public fee;
-    enum Breed{first187,second193,third198}
-    mapping(uint256 => Breed) public tokenIdToBreed;
+    bytes32 message;
+    uint256 public count;
+    enum Image{first,second,third,fourth, fifth}
+
+    mapping(uint256 => Image) public tokenIdToImage;
+
     mapping(bytes32 => address) public requestIdToSender;
+
+    event totalcount(uint256 count);
+
     event requestedCollectible(bytes32 indexed requestId, address requester);
-    event breedAssigned(uint256 indexed tokenId, Breed breed);
+
+    //event signtransaction(msg.sender,bytes32 message);
+
+    //event Assigned(uint256 indexed tokenId, Image image);
 
     constructor(address _vrfCoordinator, address _linkToken, bytes32 _keyhash, uint256 _fee) public 
     VRFConsumerBase(_vrfCoordinator, _linkToken)
@@ -30,10 +40,10 @@ contract AdvancedCollectible is ERC721, VRFConsumerBase {
     }
 
     function fulfillRandomness(bytes32 requestId, uint256 randomNumber) internal override {
-        Breed breed = Breed(randomNumber % 3);
+        Image image = Image(randomNumber % 5);
         uint256 newTokenId = tokenCounter;
-        tokenIdToBreed[newTokenId] = breed;
-        emit breedAssigned(newTokenId, breed);
+        tokenIdToImage[newTokenId] = image;
+        //emit Assigned(newTokenId, image);
         address owner = requestIdToSender[requestId];
         _safeMint(owner, newTokenId);
         tokenCounter = tokenCounter + 1;
@@ -41,7 +51,26 @@ contract AdvancedCollectible is ERC721, VRFConsumerBase {
 
     function setTokenURI(uint256 tokenId, string memory _tokenURI) public {
 
-        require(_isApprovedOrOwner(_msgSender(), tokenId), "ERC721: caller is not owner no approved");
+        require(_isApprovedOrOwner(_msgSender(), tokenId), " not authorized");
         _setTokenURI(tokenId, _tokenURI);
+    }
+
+    
+
+    function incrementCount() public {
+        count++;
+        emit totalcount(count);
+    }
+
+    function setCount(uint256 _count) public {
+        require(_count > 0);
+        count = _count;
+    }
+
+    function sign(string memory message) public view returns (string memory){
+        // address owner = ERC721.ownerOf(tokenId);
+        // require(msg.sender == owner);
+        return message;
+        
     }
 }

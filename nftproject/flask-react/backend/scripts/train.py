@@ -70,7 +70,7 @@ def generate_and_save_images():
   noise = tf.random.normal([1, 100])
   generated_image = generator(noise, training=False)
   # generated_images = generator.predict(noise)
-  print(generated_images)
+  ##print(generated_images)
   # output_path = "./images"
   # filename = os.path.join(output_path,f"train.png")
   im = Image.fromarray(generated_image)

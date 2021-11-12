@@ -1,4 +1,5 @@
 from  scripts.fullTrain import getdata, train
+from contract_scripts import set_tokenuri, main
 from flask_cors import CORS
 # TextBlob(sentence).sentiment
 
@@ -34,7 +35,13 @@ def generate():
     #     res = "Negative"
     # 
     return jsonify({"image":"image generation done"})
-    
+
+@app.route('/mint', methods=['POST'])
+def mint():
+    return main()
+
+
+# /Users/upalc/Documents/ethapp/ethnft/ethnft/nftproject/scripts/set_tokenuri.py
 
 @app.route('/', methods=['GET'])
 def hello():
