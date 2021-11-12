@@ -1,5 +1,5 @@
 from brownie import network, Collectible
-from scripts.helpful_scripts import OPENSEA_URL, get_account, get_imagenumber
+from contract_scripts.helpful_scripts import OPENSEA_URL, get_account, get_imagenumber
 import json, os
 from pathlib import Path
 
