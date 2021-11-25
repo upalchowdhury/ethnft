@@ -1,5 +1,6 @@
 from  scripts.fullTrain import getdata, train
-from contract_scripts import set_tokenuri, main
+from scripts.upload_To_Pinata import main
+# from contract_scripts.set_tokenuri import main
 from flask_cors import CORS
 # TextBlob(sentence).sentiment
 
@@ -13,7 +14,7 @@ DATA_PATH = './images/'
 EPOCHS = 5
 
 train_dataset = getdata(DATA_PATH)
-
+ipfsfilepath = "../ui/frontend/src/ipfs.json"
 
 
 
@@ -25,6 +26,7 @@ def generate():
     # TODO
     # Smartcontract Pay
     train(train_dataset, EPOCHS)
+    main(ipfsfilepath)
     
     
     # sentiment = TextBlob(sentence).sentiment
