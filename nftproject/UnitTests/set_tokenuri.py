@@ -1,5 +1,5 @@
-from brownie import network, Collectible
-from scripts.helpful_scripts import OPENSEA_URL, get_account, get_imagenumber
+from brownie import network, Nft
+from UnitTests.helpful_scripts import OPENSEA_URL, get_account, get_imagenumber
 import json, os
 from pathlib import Path
 
@@ -7,7 +7,7 @@ from pathlib import Path
 #     "198": "https://ipfs.io/ipfs/Qme5s3x7jyrZkoaZZZzPD9YSV8o39pMAxooBCVQbhXN13o?filename=0-198.json"
 # }
 # metadata/rinkeby/0-train-2.png.json
-jsonpath = "/Users/upalc/Documents/ethapp/ethnft/ethnft/nftproject/metadata/rinkeby/0-train-2.png.json"
+jsonpath = "../metadata/rinkeby/0-train-2.png.json"
 
 rel_path_metadata = "../metadata/rinkeby"
 
@@ -31,7 +31,7 @@ def get_meta(jsonpath):
 
 def main():
     print(f"Working on {network.show_active()}")
-    collectible = Collectible[-1]
+    collectible = Nft[-1]
     number_of_collectibles = collectible.tokenCounter()
     print(f"You have {number_of_collectibles} tokenIds")
     for token_id in range(number_of_collectibles):
@@ -48,4 +48,4 @@ def set_tokenURI(token_id, nft_contract, tokenURI):
     print(
         f"Please view your NFT at {OPENSEA_URL.format(nft_contract.address, token_id)}"
     )
-    print("Please wait up to 20 minutes, and hit the refresh metadata button")
+    print("Please wait up to 10 minutes")

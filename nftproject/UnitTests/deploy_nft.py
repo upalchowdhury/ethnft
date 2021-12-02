@@ -1,4 +1,4 @@
-from scripts.helpful_scripts import (
+from UnitTests.helpful_scripts import (
     get_account,
     OPENSEA_URL,
     get_contract
@@ -12,6 +12,7 @@ def deploy_and_create():
     collectible = Nft.deploy(
         {"from": account}
     )
+    print(collectible, account, network.show_active())
     return collectible
 
 

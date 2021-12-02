@@ -21,6 +21,11 @@ contract Nft is Metadata{
     address indexed minter
   );
 
+  event Mint(
+    address to,
+    string tokenuri
+  );
+
   modifier onlyOwner()
   {
     require(msg.sender == owner, "Not the owner");
@@ -50,6 +55,7 @@ contract Nft is Metadata{
   function mint(address _to, uint256 _tokenId, string calldata _uri) external onlyOwner {
     super._mint(_to, _tokenId);
     super._setTokenUri(_tokenId, _uri);
+    emit Mint(_to,_uri)
   }
  
 }
